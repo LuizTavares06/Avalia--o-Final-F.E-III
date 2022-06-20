@@ -153,26 +153,23 @@ function logarNoSistema(logIn: any) {
     
     let listaUsuarios: Usuario[] = buscarUsuarioNoStorage();
 
-    let existe: boolean = listaUsuarios.some((usuario)  => {
+    let indice: number = listaUsuarios.findIndex((usuario)  => {
         return usuario.email === logIn.email && usuario.senha === logIn.senha
     });
 
 
-    if (!existe) {
+    if (indice === -1) {
         alert ('O e-mail e/ou senha digitados estão incorretos. Por favor, verifique e tente novamente.')
         return
-    }
+    };
 
-    let indiceUser = listaUsuarios.findIndex((usuario)  => {
-        return usuario.email === logIn.email
-    });
+    
 
 
 
-    sessionStorage.setItem('logIn' , emailLogin.value);
+    sessionStorage.setItem('UsuarioLogado' , JSON.stringify(listaUsuarios[indice]));
     window.location.href = 'public/home.html'; 
 
-    console.log(`este é o indice do Usuario ${indiceUser}`)
 }
 
 
